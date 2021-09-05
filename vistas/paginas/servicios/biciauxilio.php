@@ -282,7 +282,7 @@ width:100%;
     <div class="container text-center text-md-left" data-aos="fade-up">
       <h1>A+ <span><?php echo $datosAutoauxilio[0]['titulo'];?></span></h1>
       <h2><?php echo $datosAutoauxilio[0]['subtitulo'];?></span></h2>
-      <a href="#about" class="btn-get-started scrollto">Escribinos</a>
+      <a href="#contact" class="btn-get-started scrollto">Escribinos</a>
     </div>
 </section>
 <section id="about" class="about">
@@ -437,3 +437,6 @@ width:100%;
 
       </div>
     </section>
+    <?php
+      include('contacteme.php');
+    ?>

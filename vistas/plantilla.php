@@ -19,6 +19,34 @@ $modo = 'asc';
 $estado = 1;
 $paginas = ControladorLanding::ctrMostrarPaginas($item,$valor,$orden,$limite,$modo,$estado);
 
+ //12 son 12
+$numero=12;
+$links = ["serenidad","salud","proteccion","retiro","ahorro","independientes",
+  "profesional","armas","banco","asistencia","autoauxilio","motoauxilio"
+  ,"biciauxilio"];
+
+
+for ($i=0; $i <= 7; $i++) { 
+
+  $nuevoLink= array();
+  $numAleatorio = rand(0,$numero);
+
+
+  // echo "i:".$i."-Num".$numero."-aleatorio".$numAleatorio;
+
+  unset($links[$numAleatorio]);
+  sort($links);
+
+  $numero--;
+ 
+}
+
+
+
+
+
+
+// echo '<pre>';print_r($links);echo '</pre>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +65,7 @@ $paginas = ControladorLanding::ctrMostrarPaginas($item,$valor,$orden,$limite,$mo
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Krub:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
+ 
   <!-- Vendor CSS Files -->
   <link href="vistas/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="vistas/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
@@ -46,6 +74,8 @@ $paginas = ControladorLanding::ctrMostrarPaginas($item,$valor,$orden,$limite,$mo
   <link href="vistas/assets/vendor/venobox/venobox.css" rel="stylesheet">
   <link href="vistas/assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="vistas/assets/vendor/css/font-awesome.css" rel="stylesheet">
+  <link href="vistas/assets/vendor/font-awesome/css/font-awesome.min.css">
+
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
@@ -61,20 +91,29 @@ $paginas = ControladorLanding::ctrMostrarPaginas($item,$valor,$orden,$limite,$mo
   
   <div class="container d-flex align-items-center">
 
-    <a href="" class="logo"><img src="vistas/assets/img/logo1.png" alt="" class="img-fluid animated2"></a>
+    <a href="index.php" class="logo"><img src="vistas/assets/img/logo1.png" alt="" class="img-fluid animated2"></a>
       
     <?php
-        
-        include('vistas/paginas/navbar.php');
+      if (isset($_GET["ruta"])){
 
-      ?>
+        $sobreUs=null;  
+
+      } else{
+
+        $sobreUs="#about";
+        
+      }
+      include('vistas/paginas/navbar.php');
+
+    ?>
   </div>
-    </div>
+    
   </header>
 
   <!-- ======= Hero Section ======= -->
 
   <?php
+
     if (isset($_GET["ruta"])) {
 
         if ($_GET["ruta"] == "serenidad"|| 
@@ -89,19 +128,21 @@ $paginas = ControladorLanding::ctrMostrarPaginas($item,$valor,$orden,$limite,$mo
             $_GET["ruta"] == "asistencia"||
             $_GET["ruta"] == "autoauxilio"||
             $_GET["ruta"] == "motoauxilio"||
-            $_GET["ruta"] == "biciauxilio") {
-
+            $_GET["ruta"] == "biciauxilio"||
+            $_GET["ruta"] == "sobrenosotros") {
+            
+            
           include "paginas/servicios/" . $_GET["ruta"] . ".php";
 
         }else{
-
+        
           include "paginas/404.php";
 
         }
+        
       }else{
-
-      
-    include('vistas/paginas/hero.php');
+        
+    
 
   ?>
 
@@ -110,13 +151,12 @@ $paginas = ControladorLanding::ctrMostrarPaginas($item,$valor,$orden,$limite,$mo
 
   <main id="main">
   
-    <?php foreach ($paginas as $key => $value): ?>
+    <?php include('vistas/paginas/slide.php'); ?>
+    <?php include('vistas/paginas/bread.php'); ?>
+    <?php include('vistas/paginas/sobrenosotros.php'); ?>
+    <?php include('vistas/paginas/servicios/contacteme.php'); ?>
 
-      <?php if($value['nombre']!='hero'){include('vistas/paginas/'.$value['url'].'.php');}; ?>
       
-    <?php endforeach ?>
-
-    <!-- ======= About Section ======= -->
     
 
   </main><!-- End #main -->
